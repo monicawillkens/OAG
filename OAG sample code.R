@@ -17,7 +17,6 @@ full_data$long<-NULL
 summary(full_data)
 
 # Create a model for prediction using `train_set`, and evaluate your model's performance using `test_set`.
-# You can try several models and pick the best one.
 
 #data split
 trainIndex <- createDataPartition(full_data$energy_per_sqft, p = .8, list = FALSE)
@@ -49,8 +48,7 @@ test_actuals_svr <- test_set$energy_per_sqft
 rmse_svr <- sqrt(mean((test_predictions_svr - test_actuals_svr)^2))
 print(paste("RMSE for SVR on Test Set:", rmse_svr))
 
-# Compare RMSE of these three models. Which model shows the best performance?
-# What are some other characteristics that can help determine the best model?
+# Compare RMSE of these three models. 
 
 # decision tree
 library(rpart)
@@ -72,15 +70,14 @@ rmse_dt <- sqrt(mean((test_predictions_dt - test_actuals_dt)^2))
 print(paste("RMSE for Decision Tree on Test Set:", rmse_dt))
 
 
-# Assume the overall temperature increases by 5 degrees in the next 10 years. We need to make predictions about energy usage.
+# Assume the overall temperature increases by 5 degrees in the next 10 years.
 
 new_data <- full_data
 new_data$temp <- new_data$temp + 5
 new_data$energy_per_sqft <- NULL
 
 view(new_data)
-# Now, you have a new dataset created by modifying the temperature in the full data.
-# Tip: Even though your target variable is `energy_per_sqft`, you ultimately want to know the whole energy consumption (by hour).
+# dataset created by modifying the temperature in the full data.
 # Calculate the total energy consumption by multiplying `energy_per_sqft` with `sqft` to determine the peak energy demand.
 
 
